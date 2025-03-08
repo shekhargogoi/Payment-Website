@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,19 +13,20 @@
             background-color: #121212;
             color: white;
             margin: 0;
-            padding: 0;
+            padding: 70px 0 0 0; /* Added padding to prevent content from being hidden behind the navbar */
             text-align: center;
             transition: background-color 0.3s, color 0.3s;
             line-height: 1.5;
+            min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Light Mode Styles */
         body.light-mode {
             background-color: #f4f4f4;
             color: #333;
         }
 
-        /* Navigation Bar */
         nav {
             background-color: #1f1f1f;
             padding: 10px 0;
@@ -41,78 +43,49 @@
             margin: 0 20px;
             font-size: 18px;
             text-transform: uppercase;
-            display: inline-block;
         }
 
         nav a:hover {
             color: #6200ea;
         }
 
-        /* Main Container */
         .container {
             background-color: #1f1f1f;
             padding: 40px;
             border-radius: 10px;
             width: 90%;
             max-width: 500px;
-            margin: 100px auto 20px auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin: 30px auto 20px auto; /* Adjusted margin to prevent overlap with navbar */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            flex: 1; /* Allow container to grow and take available space */
         }
 
         body.light-mode .container {
             background-color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        h1 {
-            font-size: 28px;
-            margin-bottom: 20px;
+        /* Larger Amount Input Box */
+        #amount {
+            width: 100%; /* Full width of the container */
+            padding: 15px; /* Increased padding */
+            font-size: 18px; /* Larger font size */
+            border: 2px solid #6200ea; /* Added border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #2c2c2c; /* Dark background */
+            color: white; /* Text color */
+            margin-top: 20px; /* Spacing from the elements above */
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
         }
 
-        .upi-container {
-            margin-top: 30px;
+        body.light-mode #amount {
+            background-color: #f0f0f0; /* Light background for light mode */
+            color: #333; /* Text color for light mode */
+            border-color: #3700b3; /* Border color for light mode */
         }
 
-        /* Payment Button */
-        .payment-button {
-            background-color: #6200ea;
-            color: white;
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .payment-button:hover {
-            background-color: #3700b3;
-        }
-
-        .payment-button:active {
-            background-color: #6200ea;
-        }
-
-        .payment-button a {
-            text-decoration: none;
-            color: white;
-        }
-        /* Bank Transfer Details */
-        .bank-transfer-details {
-            display: none;
-            background-color: #1f1f1f;
-            color: white;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .bank-transfer-details p {
-            font-size: 18px;
-        }
-
-        .bank-transfer-button {
+        .payment-button,
+        .bank-transfer-button,
+        .qr-code-button {
             background-color: #6200ea;
             color: white;
             padding: 15px 30px;
@@ -124,47 +97,17 @@
             margin-top: 20px;
         }
 
-        .bank-transfer-button:hover {
+        .payment-button:hover,
+        .bank-transfer-button:hover,
+        .qr-code-button:hover {
             background-color: #3700b3;
         }
 
-        .bank-transfer-button:active {
-            background-color: #6200ea;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background-color: #1f1f1f;
-            padding: 40px;
-            margin-top: 50px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            margin: 50px auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        body.light-mode .contact-section {
-            background-color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .contact-section h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .contact-section p {
-            font-size: 18px;
-            color: #aaa;
-        }
-
-        /* Dark/Light Mode Toggle */
         .toggle-container {
             position: fixed;
-            top: 20px;
+            top: 80px; /* Adjusted position to prevent overlap with navbar */
             right: 20px;
-            z-index: 20;
+            z-index: 11; /* Ensure it's above other elements */
         }
 
         .switch {
@@ -212,94 +155,53 @@
             transform: translateX(26px);
         }
 
-        /* Footer Styling */
+        .bank-transfer-details {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #2c2c2c;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        body.light-mode .bank-transfer-details {
+            background-color: #f0f0f0;
+        }
+
+        /* Footer Styles */
         footer {
             background-color: #1f1f1f;
-            color: white;
-            padding: 20px;
-            margin-top: 50px;
+            padding: 20px 0;
+            margin-top: auto; /* Push footer to the bottom */
+            text-align: center;
         }
 
         footer p {
-            font-size: 16px;
-            margin: 0;
+            margin: 5px 0;
         }
 
-        /* Media Queries for Responsiveness */
-        @media (max-width: 768px) {
-            nav {
-                padding: 15px 0;
-            }
-
-            .container, .contact-section {
-                padding: 20px;
-                margin: 20px auto;
-                width: 95%;
-                max-width: 400px;
-            }
-
-            .payment-button {
-                padding: 12px 24px;
-                font-size: 16px;
-            }
-
-            .contact-section h2 {
-                font-size: 20px;
-            }
-
-            .contact-section p {
-                font-size: 16px;
-            }
-
-            .toggle-container {
-                top: 10px;
-                right: 10px;
-            }
-        }
-
-        /* Accessibility Styles */
-        a {
+        footer a {
+            color: #6200ea;
             text-decoration: none;
-            color: inherit;
-            outline: none;
         }
 
-        a:focus {
-            outline: 2px solid #6200ea;
+        footer a:hover {
+            text-decoration: underline;
         }
 
-        button {
-            border: none;
-            background: none;
-            cursor: pointer;
-        }
-
-        button:focus {
-            outline: 2px solid #6200ea;
-        }
-
-        /* Overdue Text Animation */
-        .overdue {
-            color: red;
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
+        body.light-mode footer {
+            background-color: #ffffff;
+            color: #333;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- Navigation Bar -->
     <nav>
         <a href="#">Home</a>
         <a href="#contact">Contact</a>
     </nav>
 
-    <!-- Dark/Light Mode Toggle Button -->
     <div class="toggle-container">
         <label class="switch">
             <input type="checkbox" onclick="toggleMode()">
@@ -307,30 +209,22 @@
         </label>
     </div>
 
-    <!-- Main Content -->
     <div class="container">
         <h1>Pay Rent</h1>
         <p>Current Date: <span id="date"></span></p>
         <p>Due Date: <span id="countdown"></span></p>
 
-        <p>Enter the amount you want to pay:</p>
-
-        <!-- Input field for custom amount -->
+        <!-- Larger Amount Input Box -->
         <input type="number" id="amount" placeholder="Enter Amount" min="1" step="0.01" />
 
         <div class="upi-container">
-            <!-- Button for submitting the payment -->
             <button class="payment-button" onclick="makePayment()">Pay Rent via UPI</button>
-
-            <div class="qr-code">
-                <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Rent%20Payment" alt="" />
-            </div>
+            <button class="qr-code-button" onclick="viewQRCode()">QR-CODE</button>
         </div>
-        <!-- Bank Transfer Option Button -->
+
         <button class="bank-transfer-button" onclick="toggleBankTransferDetails()">Bank Transfer Details</button>
 
-        <!-- Bank Transfer Details -->
-        <div class="bank-transfer-details">
+        <div class="bank-transfer-details" style="display:none;">
             <p><strong>Account Number:</strong> 77780103507302</p>
             <p><strong>IFSC Code:</strong> FDRL0007778</p>
             <p><strong>Branch Name:</strong> Neo Banking-Jupiter</p>
@@ -338,38 +232,30 @@
         </div>
     </div>
 
-    <!-- Contact Section -->
-    <div class="contact-section" id="contact">
-        <h2>Contact Me</h2>
-        <p><strong>Phone Number:</strong> <a href="tel:+918638733727">8638733727</a></p>
-        <p><strong>Email:</strong> <a href="mailto:gogoida1234@gmail.com">gogoida1234@gmail.com</a></p>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Shekhar Suman Gogoi. All rights reserved.</p>
+    <!-- Footer Section -->
+    <footer id="contact">
+        <p><strong>Contact Details:</strong></p>
+        <p>Email: <a href="mailto:gogoida1234@gmail.com">gogoida1234@gmail.com</a></p>
+        <p>Phone: <a href="tel:+918638733727">+91 8638733727</a></p>
+        <p>Address: Silapathar, Dhemaji, Assam</p>
+        © 2025 Shekhar Suman Gogoi. All rights reserved.
     </footer>
 
     <script>
-        // Function to toggle between dark and light mode
         function toggleMode() {
             document.body.classList.toggle('light-mode');
         }
 
-        // Function to display current date
         function displayCurrentDate() {
             const date = new Date();
             const formattedDate = date.toLocaleDateString();
             document.getElementById("date").textContent = formattedDate;
         }
 
-        // Function to calculate countdown to due date (7th of the month)
         function countdownToDueDate() {
             const today = new Date();
             const currentMonth = today.getMonth();
             const currentYear = today.getFullYear();
-
-            // Set due date to the 7th of the next month if today's date is past the 7th
             let dueDate = new Date(currentYear, currentMonth, 7);
 
             if (today.getDate() > 7) {
@@ -379,21 +265,14 @@
             const timeDiff = dueDate - today;
             const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-            if (today.getDate() > 7) {
-                document.getElementById("countdown").textContent = "Overdue";
-                document.getElementById("countdown").classList.add('overdue');
-            } else {
-                document.getElementById("countdown").textContent = daysRemaining + " days remaining";
-            }
+            document.getElementById("countdown").textContent = today.getDate() > 7 ? "Overdue" : daysRemaining + " days remaining";
         }
 
-        // Function to toggle bank transfer details
         function toggleBankTransferDetails() {
             const bankDetails = document.querySelector('.bank-transfer-details');
             bankDetails.style.display = bankDetails.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Function to handle payment
         function makePayment() {
             const amount = document.getElementById('amount').value;
             if (!amount || amount <= 0) {
@@ -402,16 +281,18 @@
             }
 
             const upiUrl = `upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=${amount}&cu=INR&tn=Rent%20Payment`;
-
-            // Redirect to the UPI link with the custom amount
             window.location.href = upiUrl;
         }
 
-        window.onload = function() {
+        function viewQRCode() {
+            window.open("https://drive.google.com/file/d/1ei5DjrPzxgn2YJzgfgcKBCNE6bqwKInM/view?usp=drive_link", "_blank");
+        }
+
+        window.onload = function () {
             displayCurrentDate();
             countdownToDueDate();
         }
     </script>
-
 </body>
+
 </html>
