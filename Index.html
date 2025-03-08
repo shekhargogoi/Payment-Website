@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Payment</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+        }
+
+        /* Light Mode Styles */
+        body.light-mode {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #1f1f1f;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: #6200ea;
+        }
+
+        /* Main Container */
+        .container {
+            background-color: #1f1f1f;
+            padding: 40px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            margin: 100px auto 20px auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        body.light-mode .container {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .upi-container {
+            margin-top: 30px;
+        }
+
+        /* Payment Button */
+        .payment-button {
+            background-color: #6200ea;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .payment-button:hover {
+            background-color: #3700b3;
+        }
+
+        .payment-button:active {
+            background-color: #6200ea;
+        }
+
+        .payment-button a {
+            text-decoration: none;
+            color: white;
+        }
+
+        /* QR Code Styling */
+        .qr-code {
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #1f1f1f;
+            padding: 40px;
+            margin-top: 50px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        body.light-mode .contact-section {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .contact-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            font-size: 18px;
+            color: #aaa;
+        }
+
+        /* Dark/Light Mode Toggle */
+        .toggle-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #6200ea;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #1f1f1f;
+            color: white;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 0;
+            }
+
+            .container, .contact-section {
+                padding: 20px;
+                margin: 20px auto;
+                width: 95%;
+                max-width: 400px;
+            }
+
+            .payment-button {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+
+            .contact-section h2 {
+                font-size: 20px;
+            }
+
+            .contact-section p {
+                font-size: 16px;
+            }
+
+            .toggle-container {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        /* Accessibility Styles */
+        a {
+            text-decoration: none;
+            color: inherit;
+            outline: none;
+        }
+
+        a:focus {
+            outline: 2px solid #6200ea;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        button:focus {
+            outline: 2px solid #6200ea;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Dark/Light Mode Toggle Button -->
+    <div class="toggle-container">
+        <label class="switch">
+            <input type="checkbox" onclick="toggleMode()">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Make a Payment</h1>
+        <p>Click below to pay ₹5000 directly using UPI.</p>
+
+        <div class="upi-container">
+            <a href="upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Payment%20Request" target="_blank">
+                <button class="payment-button">Pay ₹5000 via UPI</button>
+            </a>
+
+            <div class="qr-code">
+                <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Payment%20Request" alt="QR Code" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section" id="contact">
+        <h2>Contact Me</h2>
+        <p><strong>Phone Number:</strong> <a href="tel:+918638733727">8638733727</a></p>
+        <p><strong>Email:</strong> <a href="mailto:gogoida1234@gmail.com">gogoida1234@gmail.com</a></p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Shekhar Suman Gogoi. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to toggle between dark and light mode
+        function toggleMode() {
+            document.body.classList.toggle('light-mode');
+        }
+    </script>
+
+</body>
+</html>
