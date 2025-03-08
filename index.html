@@ -97,7 +97,23 @@
             text-decoration: none;
             color: white;
         }
+<style>
+    .view-button {
+        background-color: #6200ea;
+        color: white;
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 20px;
+    }
 
+    .view-button:hover, .download-button:hover {
+        background-color: #3700b3;
+    }
+</style>
         /* Bank Transfer Details */
         .bank-transfer-details {
             display: none;
@@ -324,9 +340,10 @@
             <button class="payment-button" onclick="makePayment()">Pay Rent via UPI</button>
 
             <div class="qr-code">
-                <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Rent%20Payment" alt="QR Code" />
+                <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Rent%20Payment" alt="" />
             </div>
         </div>
+<!-- View File Button -->
 <a href="https://drive.google.com/file/d/1ei5DjrPzxgn2YJzgfgcKBCNE6bqwKInM/view?usp=drive_link" target="_blank">
     <button class="view-button">View File</button>
 </a>
