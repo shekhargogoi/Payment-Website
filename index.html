@@ -119,6 +119,27 @@
             background-color: #6200ea;
         }
 
+        /* Download QR Button */
+        .download-qr-button {
+            background-color: #6200ea;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .download-qr-button:hover {
+            background-color: #3700b3;
+        }
+
+        .download-qr-button:active {
+            background-color: #6200ea;
+        }
+
         /* Contact Section */
         .contact-section {
             background-color: #1f1f1f;
@@ -305,6 +326,11 @@
 
         <!-- Bank Transfer Button -->
         <button class="bank-transfer-button" onclick="openBankTransferDetails()">Pay via Bank Transfer</button>
+
+        <!-- Download QR Button -->
+        <a href="https://github.com/shekhargogoi/Payment-Website/blob/3b20253bd6a2eb3ad2ac459f793d26b550e21488/QR.jpg" download="payment-qr-code.jpg">
+            <button class="download-qr-button">Download QR Code</button>
+        </a>
 
     </div>
 
