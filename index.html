@@ -270,16 +270,19 @@
 
     <!-- Main Content -->
     <div class="container">
-        <h1>Make a Payment</h1>
-        <p>Click below to pay ₹5000 directly using UPI.</p>
+        <h1>Pay Rent</h1>
+        <p>Current Date: <span id="date"></span></p>
+        <p>Due Date: <span id="countdown"></span></p>
+
+        <p>Click below to pay directly via UPI</p>
 
         <div class="upi-container">
-            <a href="upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Payment%20Request" target="_blank">
-                <button class="payment-button">Pay ₹5000 via UPI</button>
+            <a href="upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Rent%20Payment" target="_blank">
+                <button class="payment-button">Pay Rent via UPI</button>
             </a>
 
             <div class="qr-code">
-                <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Payment%20Request" alt="QR Code" />
+                <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Rent%20Payment" alt="QR Code" />
             </div>
         </div>
     </div>
@@ -301,7 +304,36 @@
         function toggleMode() {
             document.body.classList.toggle('light-mode');
         }
+
+        // Function to display current date
+        function displayCurrentDate() {
+            const date = new Date();
+            const formattedDate = date.toLocaleDateString();
+            document.getElementById("date").textContent = formattedDate;
+        }
+
+        // Function to calculate countdown to due date (7th of the month)
+        function countdownToDueDate() {
+            const today = new Date();
+            const currentMonth = today.getMonth();
+            const currentYear = today.getFullYear();
+
+            // Set due date to the 7th of the next month if today's date is past the 7th
+            let dueDate = new Date(currentYear, currentMonth, 7);
+
+            if (today.getDate() > 7) {
+                dueDate = new Date(currentYear, currentMonth + 1, 7);
+            }
+
+            const timeDiff = dueDate - today;
+            const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            document.getElementById("countdown").textContent = `${daysRemaining} days remaining`;
+        }
+
+        window.onload = function() {
+            displayCurrentDate();
+            countdownToDueDate();
+        }
     </script>
 
 </body>
-</html>
