@@ -98,46 +98,11 @@
             color: white;
         }
 
-        /* Bank Transfer Button */
-        .bank-transfer-button {
-            background-color: #6200ea;
-            color: white;
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        /* QR Code Styling */
+        .qr-code {
             margin-top: 20px;
-        }
-
-        .bank-transfer-button:hover {
-            background-color: #3700b3;
-        }
-
-        .bank-transfer-button:active {
-            background-color: #6200ea;
-        }
-
-        /* Download QR Button */
-        .download-qr-button {
-            background-color: #6200ea;
-            color: white;
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-        }
-
-        .download-qr-button:hover {
-            background-color: #3700b3;
-        }
-
-        .download-qr-button:active {
-            background-color: #6200ea;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         /* Contact Section */
@@ -233,45 +198,58 @@
             margin: 0;
         }
 
-        /* Modal for Bank Transfer Details */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 0;
+            }
+
+            .container, .contact-section {
+                padding: 20px;
+                margin: 20px auto;
+                width: 95%;
+                max-width: 400px;
+            }
+
+            .payment-button {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+
+            .contact-section h2 {
+                font-size: 20px;
+            }
+
+            .contact-section p {
+                font-size: 16px;
+            }
+
+            .toggle-container {
+                top: 10px;
+                right: 10px;
+            }
         }
 
-        .modal-content {
-            background-color: #1f1f1f;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            color: white;
-        }
-
-        .close {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            float: right;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: white;
+        /* Accessibility Styles */
+        a {
             text-decoration: none;
+            color: inherit;
+            outline: none;
+        }
+
+        a:focus {
+            outline: 2px solid #6200ea;
+        }
+
+        button {
+            border: none;
+            background: none;
             cursor: pointer;
         }
 
+        button:focus {
+            outline: 2px solid #6200ea;
+        }
     </style>
 </head>
 <body>
@@ -308,29 +286,6 @@
             <div class="qr-code">
                 <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Rent%20Payment" alt="QR Code" />
             </div>
-        </div>
-
-        <!-- Bank Transfer Button -->
-        <button class="bank-transfer-button" onclick="openBankTransferDetails()">Pay via Bank Transfer</button>
-
-        <!-- Download QR Button -->
-        <a href="https://github.com/shekhargogoi/Payment-Website/blob/3b20253bd6a2eb3ad2ac459f793d26b550e21488/QR.jpg" download="payment-qr-code.jpg">
-            <button class="download-qr-button">Download QR Code</button>
-        </a>
-
-    </div>
-
-    <!-- Modal for Bank Transfer Details -->
-    <div id="bankTransferModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Bank Transfer Details</h2>
-            <p><strong>Account Name:</strong> Shekhar Suman Gogoi</p>
-            <p><strong>Bank Name:</strong> XYZ Bank</p>
-            <p><strong>Account Number:</strong> 1234567890</p>
-            <p><strong>IFSC Code:</strong> XYZ123456</p>
-            <p><strong>Branch:</strong> ABC Branch</p>
-            <p><strong>Amount:</strong> ₹<span id="transferAmount"></span></p>
         </div>
     </div>
 
@@ -377,30 +332,23 @@
 
             if (today.getDate() > 7) {
                 document.getElementById("countdown").textContent = "Overdue";
-                document.getElementById("countdown").classList.add('overdue');
             } else {
                 document.getElementById("countdown").textContent = daysRemaining + " days remaining";
             }
         }
 
-        // Function to handle bank transfer details modal
-        function openBankTransferDetails() {
+        // Function to handle payment
+        function makePayment() {
             const amount = document.getElementById('amount').value;
             if (!amount || amount <= 0) {
                 alert('Please enter a valid amount!');
                 return;
             }
 
-            document.getElementById('transferAmount').textContent = amount;
+            const upiUrl = `upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=${amount}&cu=INR&tn=Rent%20Payment`;
 
-            const modal = document.getElementById("bankTransferModal");
-            modal.style.display = "block";
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            const modal = document.getElementById("bankTransferModal");
-            modal.style.display = "none";
+            // Redirect to the UPI link with the custom amount
+            window.location.href = upiUrl;
         }
 
         window.onload = function() {
