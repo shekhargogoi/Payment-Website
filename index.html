@@ -98,11 +98,39 @@
             color: white;
         }
 
-        /* QR Code Styling */
-        .qr-code {
+        /* Bank Transfer Details */
+        .bank-transfer-details {
+            display: none;
+            background-color: #1f1f1f;
+            color: white;
+            padding: 20px;
             margin-top: 20px;
-            border-radius: 8px;
-            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .bank-transfer-details p {
+            font-size: 18px;
+        }
+
+        .bank-transfer-button {
+            background-color: #6200ea;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .bank-transfer-button:hover {
+            background-color: #3700b3;
+        }
+
+        .bank-transfer-button:active {
+            background-color: #6200ea;
         }
 
         /* Contact Section */
@@ -250,6 +278,18 @@
         button:focus {
             outline: 2px solid #6200ea;
         }
+
+        /* Overdue Text Animation */
+        .overdue {
+            color: red;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -286,6 +326,16 @@
             <div class="qr-code">
                 <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=upi://pay?pa=8638733727@jupiteraxis&pn=Shekhar%20Suman%20Gogoi&am=5000&cu=INR&tn=Rent%20Payment" alt="QR Code" />
             </div>
+        </div>
+
+        <!-- Bank Transfer Option Button -->
+        <button class="bank-transfer-button" onclick="toggleBankTransferDetails()">Bank Transfer Details</button>
+
+        <!-- Bank Transfer Details -->
+        <div class="bank-transfer-details">
+            <p><strong>Account Number:</strong> 77780103507302</p>
+            <p><strong>IFSC Code:</strong> FDRL0007778</p>
+            <p><strong>Account Name:</strong> SHEKHAR SUMAN GOGOI</p>
         </div>
     </div>
 
@@ -332,9 +382,16 @@
 
             if (today.getDate() > 7) {
                 document.getElementById("countdown").textContent = "Overdue";
+                document.getElementById("countdown").classList.add('overdue');
             } else {
                 document.getElementById("countdown").textContent = daysRemaining + " days remaining";
             }
+        }
+
+        // Function to toggle bank transfer details
+        function toggleBankTransferDetails() {
+            const bankDetails = document.querySelector('.bank-transfer-details');
+            bankDetails.style.display = bankDetails.style.display === 'block' ? 'none' : 'block';
         }
 
         // Function to handle payment
