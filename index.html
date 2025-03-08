@@ -327,7 +327,12 @@
 
             const timeDiff = dueDate - today;
             const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            document.getElementById("countdown").textContent = `${daysRemaining} days remaining`;
+
+            if (today.getDate() > 7) {
+                document.getElementById("countdown").textContent = "Overdue";
+            } else {
+                document.getElementById("countdown").textContent = `${daysRemaining} days remaining`;
+            }
         }
 
         window.onload = function() {
@@ -337,3 +342,4 @@
     </script>
 
 </body>
+</html>
